@@ -1,18 +1,21 @@
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom right, rgba(5, 5, 5, 0.744), white);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
 }
+
 .container {
     width: 90vw;
     max-width: 900px;
@@ -22,6 +25,7 @@ body {
     padding: 40px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .container:hover {
     transform: translateY(-10px);
     box-shadow: 12px 12px 24px black;
@@ -29,15 +33,25 @@ body {
 
 h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin: 20px 20px;
     color: #333;
     font-size: 2rem;
 }
+
+p {
+    text-align: center;
+    font-size: larger;
+    font-weight: 600;
+}
+
 form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
 }
+
 label {
     font-weight: 600;
     color: #444;
@@ -55,7 +69,11 @@ input:focus {
     border-color: #007bff;
     outline: none;
 }
-button{
+
+button {
+    /* display: block; */
+    /* text-align: center; */
+    width: 100%;
     padding: 14px;
     background-color: #007bff;
     color: white;
@@ -71,6 +89,38 @@ button:hover {
     background-color: #0056b3;
 }
 
+.hidden {
+    display: none;
+}
+
+.icon {
+    /* display: block; */
+    text-align: center;
+    font-size: xx-large;
+
+}
+
+.cupIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to right, gold, orange);
+    color: white;
+    font-size: 2rem;
+    margin: auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+}
+
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
 @media (max-width: 375px) {
     .container {
         padding: 24px 16px;
@@ -81,8 +131,14 @@ button:hover {
         font-size: 1.5rem;
     }
 
+    .details {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
     input,
-    button[type="submit"] {
+    button {
         font-size: 0.95rem;
         padding: 10px;
     }
@@ -114,7 +170,7 @@ button:hover {
     }
 
     input,
-    button[type="submit"] {
+    button {
         font-size: 1.1rem;
         padding: 16px;
     }
