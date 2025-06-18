@@ -37,6 +37,9 @@ h2 {
     color: #333;
     font-size: 2rem;
 }
+h3{
+    margin: 20px 0px;
+}
 
 p {
     text-align: center;
@@ -83,6 +86,7 @@ button {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 10px 0px;
 }
 
 button:hover {
@@ -114,11 +118,27 @@ button:hover {
     border-radius: 50%;
 }
 
+.cupIcon:hover .icon{
+
+    transition: transform 2s ease;
+    transform-origin: center center;
+    transform: rotateY(360deg);
+
+}
+
 
 .details {
     display: flex;
     justify-content: space-between;
     margin: 20px 0px;
+}
+.btn{
+    background: linear-gradient(to right, gold, orange);
+    transition: outline 0.3s ease;
+    color: black;
+}
+.btn:hover{
+    outline: 2px solid #0056b3;
 }
 
 @media (max-width: 375px) {

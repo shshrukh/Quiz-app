@@ -22,19 +22,19 @@
                 <label for="userName">Name</label>
                 <input type="text" id="userName" placeholder="User Name" required>
                 <label for="age">Age</label>
-                <input type="number" id="age" placeholder="Name" required>
+                <input type="number" id="age" placeholder="Age" required>
                 <button type="submit">Enter</button>
             </form>
         </div>
     </section>
     <!-- quiz game details -->
-    <section class="QuizGameGuide">
-        <div class="container ">
+    <section class="quizGameGuide hidden">
+        <div class="container">
             <div class="cupIcon">
                 <i class="fa-solid fa-trophy icon"></i>
             </div>
             <h2>Knowledge Quiz</h2>
-            <p class="userNameTarget">hello user test your Knowledge with our fun quiz</p>
+            <p class="userNameTarget"></p>
             <div class="gameQuestionDetails">
                 <div class="QuestionsNumber details">
                     <h3>Questions</h3>
@@ -49,6 +49,22 @@
                 
             </div>
         </div>
+    </section>
+    <!-- question sections -->
+    <section class="quizQuestions hidden">
+        <div class="container">
+            <h3 class="question">hello spelling is?</h3>
+            <div class="options">
+                <button class="btn optionA">A. hello</button>
+                <button class="btn optionB">B. hello</button>
+                <button class="btn optionC">C. hello</button>
+                <button class="btn optionD">D. hello</button>
+            </div>
+            <div>
+                <button class="submitAnswer hidden">Submit Answer</button>
+            </div>
+        </div>
+        
     </section>
 </body>
 
