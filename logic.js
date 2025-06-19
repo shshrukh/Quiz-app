@@ -1,96 +1,73 @@
-import quizQuestions from "./question.js";
-console.log(quizQuestions);
 
-const els = {};
+
+//els object will contain all required elements
+const els ={};
+
+// making object will contain state of our app
+
 const state = {
-    userName: '',
-    userAge: 0,
-    question: [],
-    currentQuestionIndex: 0,
-    submitAnswers: []
+    userName : '',
+    userAge : 0,
 };
 
-function init() {
-    cacheDom();
-    bindEvents();
-    console.log('els object', els);
+// dom content is loaded then init function is invoked;
+function init(){
+    casheDOM();
+    bindsEvents();
 }
 
-function cacheDom() {
-    els.userScreenInfo = document.querySelector('.userInfoScreen')
-    els.name = document.getElementById('userName');
-    els.age = document.getElementById('age');
-    els.form = document.getElementById('userForm');
-    els.input = document.querySelectorAll('input');
-    els.quizGameGuide = document.querySelector('.quizGameGuide');
-    els.userNameTarget = document.querySelector('.userNameTarget');
-    els.startQuiz = document.querySelector('.startQuiz');
-    els.quizSection = document.querySelector('.quizQuestions');
-    els.questionContainer = document.querySelector('.questionContainer');
-    els.nextBtn = document.querySelector('.submitAnswer');
+// cashe the value of dome 
 
+function casheDOM(){
+    Object.assign(els,{
+        userInfoScreen : document.querySelector('.userInfoScreen'),
+        userInfo :       document.getElementById('userForm'),
+        inputUserNmae :       document.getElementById('userName'),
+        inputUserAge :        document.getElementById('age'),
+        gameGuide :      document.querySelector('.quizGameGuide'),
+    })
 }
 
-function bindEvents() {
-    els.form.addEventListener('submit', handleSubmit);
-    els.startQuiz.addEventListener('click', handleStartQuiz);
-    els.nextBtn.addEventListener('click', handleNextQuestion)
-
+// now make an event function 
+function bindsEvents(){
+    els.userInfo.addEventListener('submit', handleSubmit);
 }
 
-function handleSubmit(e) {
+// this function is call when click on submit button 
+
+function handleSubmit(e){
     e.preventDefault();
-    state.userName = els.name.value.trim();
-    state.userAge = parseInt(els.age.value, 10)
-    if (state.userName === '' || isNaN(state.userAge)) {
-        alert('please enter the correct Name or age')
+    const age = parseInt(els.inputUserAge.value);
+    const name = els.inputUserNmae.value.trim();
+
+    if(Number.isNaN(age) || age < 10 || 80 < age ){
+        alert('age 10 to 80 are allow to use this app');
         return undefined;
     }
-    els.userScreenInfo.classList.add('hidden');
-    els.userNameTarget.innerText = `Hello ${state.userName.toUpperCase()} test your Knowledge with our fun quiz`
-    els.quizGameGuide.classList.remove('hidden');
-    console.log('state is updated', state.userName, state.userAge);
-
-}
-function handleStartQuiz() {
-    els.quizGameGuide.classList.add('hidden');
-    els.quizSection.classList.remove('hidden');
-    state.question =getRandomQuestions(quizQuestions);
-    console.log('this is random question form quia questions', state.question);
-    renderQuestion();
-
-}
-function getRandomQuestions(data, count = 10) {
-  return [...data].sort(() => Math.random() - 0.5).slice(0, count);
-}
-
-function renderQuestion() {
-    const i = state.currentQuestionIndex;
-    const currentQuestion = state.question;
-
-    if (!state.question.length || i >= state.question.length) {
-        alert("Quiz completed!");
-        els.nextBtn.disabled = true;
-        return;
+    
+    if(!name) {
+        alert('Please enter your Name');
+        return undefined;
     }
-    const q = currentQuestion[i];
-    els.questionContainer.innerHTML = `
-    <h3 class="question">
-         Question ${i + 1} of ${state.question.length}: ${q.question}
-    </h3>
 
-    <div class="options">
-      <button class="btn optionA">A. ${q.options[0].text}</button>
-      <button class="btn optionB">B. ${q.options[1].text}</button>
-      <button class="btn optionC">C. ${q.options[2].text}</button>
-      <button class="btn optionD">D. ${q.options[3].text}</button>
-    </div>`;
+    const nameRegex = /^[A-Z-a-z\s]+$/;
+    if(!nameRegex.test(name)){
+        alert('name should be contain letters and spaces');
+        return undefined;
+    }
+    
+    state.userName = name;
+    state.userAge = age;
+
+    els.userInfoScreen.classList.add('hidden');
+    els.gameGuide.classList.remove('hidden')
 }
 
 
-function handleNextQuestion() {
-    state.currentQuestionIndex++;
-    renderQuestion();
-}
 
-document.addEventListener('DOMContentLoaded', init)
+
+
+// once the documented is loaded we will invoke a function 
+
+document.addEventListener( 'DOMContentLoaded' , init );
+
