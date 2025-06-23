@@ -136,11 +136,14 @@ button:hover {
     background: linear-gradient(to right, gold, orange);
     transition: outline 0.3s ease;
     color: black;
+    text-align: start;
 }
 .btn:hover{
     outline: 2px solid #0056b3;
 }
-
+.selected{
+    outline: 2px solid #0056b3;
+}
 @media (max-width: 375px) {
     .container {
         padding: 24px 16px;
