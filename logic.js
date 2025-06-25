@@ -32,7 +32,9 @@ function cacheDOM() {
         startQuizBtn: document.querySelector('.startQuiz'),
         quizContainer: document.querySelector('.quizQuestions'),
         questionContainer: document.querySelector('.questionContainer'),
-        submitAnswer: document.querySelector('.submitAnswer')
+        submitAnswer: document.querySelector('.submitAnswer'),
+        finalScore: document.querySelector('.finalScoreDetails'),
+        gameScore : document.querySelector('.gameScore')
     })
 }
 
@@ -75,6 +77,11 @@ function handleSubmit(e) {
 
 // on clicking start quiz handleStartQuiz start
 function handleStartQuiz() {
+    if(els.gameScore.classList !== 'hidden'){
+        els.gameScore.classList.add('hidden');
+        els.finalScore.innerHTML = '';
+        
+    }
     const randomTenQuestions = [...quizQuestions].sort(() => (Math.random() - 0.5)).slice(0, 10);
     state.questions = randomTenQuestions;
     // console.log(state);
@@ -103,7 +110,7 @@ function renderQuestion() {
 
         const createBtn = document.createElement('button');
         createBtn.classList.add('btn')
-        createBtn.innerText = `${opt.text}`;
+        createBtn.innerText = `${index+1} ${opt.text}`;
         displayQuestion.appendChild(createBtn);
         createBtn.addEventListener('click', (e) => {
             console.log('the button is target form ', e.target.innerText);
@@ -122,7 +129,7 @@ function renderQuestion() {
 function handleNext() {
     const getQuestion = state.questions[state.currentQuestionIndex];
 
-    
+
     if (!state.selectedOption) {
         alert('Please select an answer before proceeding.');
         return;
@@ -134,19 +141,27 @@ function handleNext() {
         state.currentQuestionIndex++;
         renderQuestion();
     } else {
-        alert(`Quiz complete! You got ${state.correctAnswer} out of 10 correct.`);
-
-        state.currentQuestionIndex = 0;
-        state.questions = null;
-        state.correctAnswer = 0;
-        state.selectedOption = null;
-        handleStartQuiz();
+        userFinalScore();
     }
 }
 
+function userFinalScore() {
+    const scoreHeading = document.createElement('h3');
+    const restartQuizBtn = document.createElement('button');
+    scoreHeading.innerText = `${state.userName.toUpperCase()} quiz complete! You got ${state.correctAnswer} out of 10 correct.`;
+    restartQuizBtn.innerText = 'Restart Quiz';
+    els.finalScore.appendChild(scoreHeading);
+    els.finalScore.appendChild(restartQuizBtn);
+    els.quizContainer.classList.add('hidden');
+    els.gameScore.classList.remove('hidden');
+    state.currentQuestionIndex = 0;
+    state.questions = null;
+    state.correctAnswer = 0;
+    state.selectedOption = null;
+    restartQuizBtn.addEventListener('click', handleStartQuiz);
+    
 
-
-
+}
 
 // once the documented is loaded we will invoke a function 
 
